@@ -5,6 +5,7 @@ using System.Threading;
 using System.Web.Mvc;
 using WebMatrix.WebData;
 using asp_example.Models;
+using asp_example.Models.Context;
 
 namespace asp_example.Filters
 {
@@ -25,11 +26,11 @@ namespace asp_example.Filters
         {
             public SimpleMembershipInitializer()
             {
-                Database.SetInitializer<UsersContext>(null);
+                Database.SetInitializer<TodoContext>(null);
 
                 try
                 {
-                    using (var context = new UsersContext())
+                    using (var context = new TodoContext())
                     {
                         if (!context.Database.Exists())
                         {
