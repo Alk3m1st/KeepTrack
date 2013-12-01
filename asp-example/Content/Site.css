@@ -470,6 +470,18 @@ textarea {
         margin-right: 4px;
     }
 
+    .todo-item form {
+        display: inline;
+    }
+
+    .todo-item form input[type='submit'] {
+        border: none;
+        background: none;
+        text-decoration: underline;
+        font-weight: normal;
+        color: blue;
+    }
+
 /* info and errors */
 .message-info {
     border: 1px solid;
