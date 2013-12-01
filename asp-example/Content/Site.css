@@ -470,6 +470,10 @@ textarea {
         margin-right: 4px;
     }
 
+    .todo-item.archived {
+        text-decoration: line-through;
+    }
+
     .todo-item form {
         display: inline;
     }

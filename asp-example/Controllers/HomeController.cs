@@ -45,6 +45,41 @@ namespace asp_example.Controllers
             return View(newVm);
         }
 
+        [HttpPost]
+        public ActionResult Archive(int id)
+        {
+            using (var db = new TodoContext())
+            {
+                var todo = db.Todos.Where(t => t.Id == id)
+                    .SingleOrDefault();
+
+                if (todo != null)
+                {
+                    todo.Archived = true;
+                    db.SaveChanges();
+                }
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            using (var db = new TodoContext())
+            {
+                var todo = db.Todos.Where(t => t.Id == id).SingleOrDefault();
+
+                if(todo != null)
+                {
+                    db.Todos.Remove(todo);
+                    db.SaveChanges();
+                }
+            }
+
+            return RedirectToAction("Index");
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your app description page.";

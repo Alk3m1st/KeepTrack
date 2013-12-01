@@ -33,8 +33,13 @@
             <strong>@item.Created</strong> @item.Description 
             @using (var f = Html.BeginForm("Archive","Home"))
             {
-                <input type="hidden" value="@item.Id" />
-                <input type="submit" value="Archive" name="Archive" />
+                <input type="hidden" value="@item.Id" name="id" />
+                <input type="submit" value="Done" name="Archive" />
+            }
+            @using (var f = Html.BeginForm("Delete", "Home"))
+            {
+                <input type="hidden" value="@item.Id" name="id" />
+                <input type="submit" value="Delete" name="Delete" />
             }
         </li>
     }
