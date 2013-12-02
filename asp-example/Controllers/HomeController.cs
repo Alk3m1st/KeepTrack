@@ -38,11 +38,9 @@ namespace asp_example.Controllers
             {
                 db.Todos.Add(new Todo { Description = vm.Description });
                 db.SaveChanges();
-
-                newVm.AddItems(db.Todos.ToList());
             }
 
-            return View(newVm);
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
