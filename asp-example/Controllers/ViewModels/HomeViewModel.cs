@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using asp_example.Utils;
 
 namespace asp_example.Controllers.ViewModels
 {
@@ -30,23 +31,12 @@ namespace asp_example.Controllers.ViewModels
                 this.AddItem(new TodoItemViewModel
                 {
                     Archived = item.Archived,
-                    Created = GetNiceDateFormat(item.Created),
+                    Created = item.Created.GetNiceDateFormat(),
+                    ElapsedDaysClass = item.Created.GetElapsedDaysClass(),
                     Description = item.Description,
                     Id = item.Id
                 });
             }
-        }
-
-        // TODO: Move to helper/util
-        private string GetNiceDateFormat(DateTime date)
-        {
-            if (date.Date.Equals(DateTime.Now.Date))
-                return "Today";
-
-            if (date.Date.AddDays(7) > DateTime.Now.Date)
-                return date.DayOfWeek.ToString();
-
-            return date.Date.ToShortDateString();
         }
     }
 }

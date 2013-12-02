@@ -29,18 +29,20 @@
 <ul>
     @foreach(var item in Model.TodoItems)
     {
-        <li id="item-@item.Id" class="todo-item @(item.Archived ? " archived" : "")">
-            <strong>@item.Created</strong> @item.Description 
-            @using (var f = Html.BeginForm("Archive","Home"))
-            {
-                <input type="hidden" value="@item.Id" name="id" />
-                <input type="submit" value="Done" name="Archive" />
-            }
-            @using (var f = Html.BeginForm("Delete", "Home"))
-            {
-                <input type="hidden" value="@item.Id" name="id" />
-                <input type="submit" value="Delete" name="Delete" />
-            }
+        <li id="item-@item.Id" class="todo-item @item.ElapsedDaysClass @(item.Archived ? " archived" : "")">
+            <span class="todo-item-details"><strong>@item.Created</strong> @item.Description</span>
+            <span class="todo-item-actions">
+                @using (var f = Html.BeginForm("Archive", "Home"))
+                {
+                    <input type="hidden" value="@item.Id" name="id" />
+                    <input type="submit" value="Done" name="Archive" />
+                }
+                @using (var f = Html.BeginForm("Delete", "Home"))
+                {
+                    <input type="hidden" value="@item.Id" name="id" />
+                    <input type="submit" value="Delete" name="Delete" />
+                }
+            </span>
         </li>
     }
 </ul>
