@@ -9,20 +9,21 @@ namespace asp_example.Utils
     {
         public static string GetNiceDateFormat(this DateTime date)
         {
-            if (date.Date.Equals(DateTime.Now.Date))
+            if (date.ToLocalTime().Date.Equals(DateTime.UtcNow.ToLocalTime().Date))
                 return "Today";
 
-            if (date.Date.AddDays(7) > DateTime.Now.Date)
-                return date.DayOfWeek.ToString();
+            if (date.ToLocalTime().Date.AddDays(7) > DateTime.UtcNow.ToLocalTime().Date)
+                return date.ToLocalTime().DayOfWeek.ToString();
 
-            return date.Date.ToShortDateString();
+            return date.ToLocalTime().Date.ToShortDateString();
         }
 
+        // TODO: Fix this, not working properly...
         public static string GetElapsedDaysClass(this DateTime date)
         {
-            return date.Date.AddDays(4) > DateTime.Now.Date ? "three-days-elapsed" :
-                date.Date.AddDays(3) > DateTime.Now.Date ? "two-days-elapsed" :
-                date.Date.AddDays(2) > DateTime.Now.Date ? "one-day-elapsed" :
+            return date.ToLocalTime().Date.AddDays(4) > DateTime.UtcNow.ToLocalTime().Date ? "three-days-elapsed" :
+                date.ToLocalTime().Date.AddDays(3) > DateTime.UtcNow.ToLocalTime().Date ? "two-days-elapsed" :
+                date.ToLocalTime().Date.AddDays(2) > DateTime.UtcNow.ToLocalTime().Date ? "one-day-elapsed" :
                 string.Empty;
         }
     }

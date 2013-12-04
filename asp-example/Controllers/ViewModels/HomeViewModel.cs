@@ -32,6 +32,7 @@ namespace asp_example.Controllers.ViewModels
                 {
                     Archived = item.Archived,
                     Created = item.Created.GetNiceDateFormat(),
+                    Completed = item.Completed.HasValue ? item.Completed.Value.GetNiceDateFormat() : string.Empty,
                     ElapsedDaysClass = item.Created.GetElapsedDaysClass(),
                     Description = item.Description,
                     Id = item.Id

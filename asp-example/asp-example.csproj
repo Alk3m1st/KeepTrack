@@ -193,6 +193,10 @@
     <Compile Include="Migrations\201311251229100_InitialSetUp.Designer.cs">
       <DependentUpon>201311251229100_InitialSetUp.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201312041232126_AddCompletedToTodo.cs" />
+    <Compile Include="Migrations\201312041232126_AddCompletedToTodo.Designer.cs">
+      <DependentUpon>201312041232126_AddCompletedToTodo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Context\TodoContext.cs" />
@@ -323,6 +327,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201311251229100_InitialSetUp.resx">
       <DependentUpon>201311251229100_InitialSetUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201312041232126_AddCompletedToTodo.resx">
+      <DependentUpon>201312041232126_AddCompletedToTodo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

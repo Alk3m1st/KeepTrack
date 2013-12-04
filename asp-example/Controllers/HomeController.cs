@@ -54,6 +54,7 @@ namespace asp_example.Controllers
                 if (todo != null)
                 {
                     todo.Archived = true;
+                    todo.Completed = DateTime.UtcNow;
                     db.SaveChanges();
                 }
             }

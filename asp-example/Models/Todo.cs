@@ -12,6 +12,7 @@ namespace asp_example.Models
         public string Description { get; set; }
         public bool Archived { get; set; }
         public DateTime Created { get; set; }
+        public DateTime? Completed { get; set; }
 
         public Todo()
         {

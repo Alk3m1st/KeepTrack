@@ -11,6 +11,7 @@ namespace asp_example.Controllers.ViewModels
         public string Description { get; set; }
         public bool Archived { get; set; }
         public string Created { get; set; }
+        public string Completed { get; set; }
         public string ElapsedDaysClass { get; set; }
     }
 }

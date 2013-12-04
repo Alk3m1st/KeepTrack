@@ -30,7 +30,7 @@
     @foreach(var item in Model.TodoItems)
     {
         <li id="item-@item.Id" class="todo-item @item.ElapsedDaysClass @(item.Archived ? " archived" : "")">
-            <span class="todo-item-details"><strong>@item.Created</strong> @item.Description</span>
+            <span class="todo-item-details"><strong>@item.Completed</strong> @item.Description</span>
             <span class="todo-item-actions">
                 @using (var f = Html.BeginForm("Archive", "Home"))
                 {
