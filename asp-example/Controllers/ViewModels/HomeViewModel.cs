@@ -25,7 +25,10 @@ namespace asp_example.Controllers.ViewModels
 
         public void AddItems(IList<Todo> items)
         {
-            foreach (var item in items.OrderByDescending(i => i.Completed).OrderBy(i => i.Archived))
+            foreach (var item in items
+                .OrderByDescending(i => i.Created)
+                .OrderByDescending(i => i.Completed)
+                .OrderBy(i => i.Archived))
             {
                 // TODO: Use injector?
                 this.AddItem(new TodoItemViewModel

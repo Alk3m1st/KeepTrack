@@ -22,8 +22,8 @@
 @using(var f = Html.BeginForm())
 {
     @Html.LabelFor(m => m.Description)
-    @Html.TextBoxFor(m => m.Description)
-    <input type="submit" value="Add" name="AddTodo" tabindex="1" />
+    @Html.TextBoxFor(m => m.Description, new { tabindex = "1", placeholder = "Enter items here :)" })
+    <input type="submit" value="Add" name="AddTodo" />
 }
 
 <ul>
