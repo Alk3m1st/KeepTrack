@@ -19,12 +19,18 @@ namespace asp_example.Utils
         }
 
         // TODO: Fix this, not working properly...
-        public static string GetElapsedDaysClass(this DateTime date)
+        public static string GetElapsedDaysClass(this DateTime? date)
         {
-            return date.ToLocalTime().Date.AddDays(4) > DateTime.UtcNow.ToLocalTime().Date ? "three-days-elapsed" :
-                date.ToLocalTime().Date.AddDays(3) > DateTime.UtcNow.ToLocalTime().Date ? "two-days-elapsed" :
-                date.ToLocalTime().Date.AddDays(2) > DateTime.UtcNow.ToLocalTime().Date ? "one-day-elapsed" :
-                string.Empty;
+            if (!date.HasValue)
+                return string.Empty;
+
+            var dateValue = date.Value;
+
+            return dateValue.ToLocalTime().Date == DateTime.UtcNow.ToLocalTime().Date ? "today" :
+                dateValue.ToLocalTime().Date.AddDays(1) == DateTime.UtcNow.ToLocalTime().Date ? "one-day-elapsed" :
+                dateValue.ToLocalTime().Date.AddDays(2) == DateTime.UtcNow.ToLocalTime().Date ? "two-days-elapsed" :
+                dateValue.ToLocalTime().Date.AddDays(3) == DateTime.UtcNow.ToLocalTime().Date ? "three-days-elapsed" :                
+                "fully-elapsed";
         }
     }
 }

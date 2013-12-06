@@ -479,14 +479,18 @@ textarea {
     }
 
     .todo-item form input[type='submit'] {
-        border: none;
-        background: none;
-        text-decoration: underline;
+        border: #95E88E;
+        background: #649C5F;
+        /*text-decoration: underline;*/
         font-weight: normal;
-        color: blue;
+        color: #FFFFFF;
         font-size: 1em;
         margin: 0;
-        padding: 0 5px 0 0;
+        padding: 1px 5px;
+    }
+
+    .todo-item form input[type='submit']:hover {
+        background: #E08FA2;
     }
 
     li.todo-item span.todo-item-details {
@@ -500,7 +504,7 @@ textarea {
         -webkit-transition: opacity 1s, margin-left 1s;
         opacity: 0;
         z-index: 1;
-        margin-left: -100px;
+        margin-left: -50px;
         position: relative;
     }
     
@@ -509,9 +513,31 @@ textarea {
         margin-left: 0;
     }
 
+    /* Colours for elapsed days */
+    li.archived.today strong, li.archived.today span {
+        color: #5F9C82;
+    }
+
+    li.archived.one-day-elapsed strong, li.archived.one-day-elapsed span {
+        color: #8FE0CD;
+    }
+
+    li.archived.two-days-elapsed strong, li.archived.two-days-elapsed span {
+        color: #8FA2E0;
+    }
+
+    li.archived.three-days-elapsed strong, li.archived.three-days-elapsed span {
+        color: #E0CD8F;
+    }
+
+    li.archived strong, li.archived span {
+        color: #94755D;
+    }
+
     #body section.content-wrapper  ul {
         margin: 0;
-        padding: 0 0 0 20px;
+        padding: 0 0 0 5px;
+        list-style-type: none;
     }
 
 /* info and errors */
