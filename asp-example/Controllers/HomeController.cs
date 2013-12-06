@@ -14,14 +14,9 @@ namespace asp_example.Controllers
     {
         private ITodoesRepository _todoesRepository;
 
-        //public HomeController(ITodoesRepository todoesRepository)
-        //{
-        //    _todoesRepository = todoesRepository;
-        //}
-
-        public HomeController()
+        public HomeController(ITodoesRepository todoesRepository)
         {
-            _todoesRepository = new TodoesRepository();
+            _todoesRepository = todoesRepository;
         }
 
         public ActionResult Index()

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using asp_example.Repositories;
+using Autofac;
+using Autofac.Integration.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -23,6 +26,19 @@ namespace asp_example
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+
+            RegisterDependencies();
+        }
+
+        private void RegisterDependencies()
+        {
+            var builder = new ContainerBuilder();
+            builder.RegisterControllers(typeof(MvcApplication).Assembly);
+
+            builder.RegisterType<TodoesRepository>().As<ITodoesRepository>().InstancePerHttpRequest();
+
+            var container = builder.Build();
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }
     }
 }
