@@ -1,9 +1,9 @@
-﻿using asp_example.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using asp_example.Utils;
+using asp_example.models.Models;
 
 namespace asp_example.Controllers.ViewModels
 {

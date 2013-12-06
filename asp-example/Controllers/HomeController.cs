@@ -1,5 +1,5 @@
 ﻿using asp_example.Controllers.ViewModels;
-using asp_example.Models;
+using asp_example.models.Models;
 using asp_example.Models.Context;
 using System;
 using System.Collections.Generic;

@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FizzWare.NBuilder;
-using asp_example.Models;
 using asp_example.Controllers.ViewModels;
+using asp_example.models.Models;
 
 namespace asp_example.tests.Controllers.ViewModels
 {
