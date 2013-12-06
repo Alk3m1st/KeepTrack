@@ -1,6 +1,7 @@
 ﻿using asp_example.Controllers.ViewModels;
 using asp_example.models.Models;
 using asp_example.Models.Context;
+using asp_example.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,17 +12,23 @@ namespace asp_example.Controllers
 {
     public class HomeController : Controller
     {
+        private ITodoesRepository _todoesRepository;
+
+        //public HomeController(ITodoesRepository todoesRepository)
+        //{
+        //    _todoesRepository = todoesRepository;
+        //}
+
+        public HomeController()
+        {
+            _todoesRepository = new TodoesRepository();
+        }
+
         public ActionResult Index()
         {
             var vm = new HomeViewModel();
-
-            // TODO: Move to repo and use autofac instead
-            using (var db = new TodoContext())
-            {
-                var items = db.Todos;
-
-                vm.AddItems(items.ToList());
-            }
+            var items = _todoesRepository.GetAllTodoes();
+            vm.AddItems(items);
 
             return View(vm);
         }
@@ -32,13 +39,7 @@ namespace asp_example.Controllers
             if (!ModelState.IsValid)
                 return View(vm);
 
-            var newVm = new HomeViewModel();
-            // Move to repo and use injector to map from vm to model
-            using (var db = new TodoContext())
-            {
-                db.Todos.Add(new Todo { Description = vm.Description });
-                db.SaveChanges();
-            }
+            _todoesRepository.AddTodoFromDescription(vm.Description);
 
             return RedirectToAction("Index");
         }
@@ -46,18 +47,7 @@ namespace asp_example.Controllers
         [HttpPost]
         public ActionResult Archive(int id)
         {
-            using (var db = new TodoContext())
-            {
-                var todo = db.Todos.Where(t => t.Id == id)
-                    .SingleOrDefault();
-
-                if (todo != null)
-                {
-                    todo.Archived = true;
-                    todo.Completed = DateTime.UtcNow;
-                    db.SaveChanges();
-                }
-            }
+            _todoesRepository.ArchiveTodo(id);
 
             return RedirectToAction("Index");
         }
@@ -65,16 +55,7 @@ namespace asp_example.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            using (var db = new TodoContext())
-            {
-                var todo = db.Todos.Where(t => t.Id == id).SingleOrDefault();
-
-                if(todo != null)
-                {
-                    db.Todos.Remove(todo);
-                    db.SaveChanges();
-                }
-            }
+            _todoesRepository.DeleteTodo(id);
 
             return RedirectToAction("Index");
         }
