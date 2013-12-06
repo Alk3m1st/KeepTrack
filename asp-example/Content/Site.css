@@ -481,7 +481,6 @@ textarea {
     .todo-item form input[type='submit'] {
         border: #95E88E;
         background: #649C5F;
-        /*text-decoration: underline;*/
         font-weight: normal;
         color: #FFFFFF;
         font-size: 1em;
