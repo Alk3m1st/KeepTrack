@@ -6,7 +6,6 @@
 
 body {
     background-color: #fff;
-    border-top: solid 10px #000;
     color: #333;
     font-size: .85em;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
@@ -822,4 +821,12 @@ tr.pager td {
         footer p {
             margin: 0;
         }
+}
+
+/* Hide FoUC and hide Angular JS list by default - Effectively a JavaScript switch to determine which list to use */
+html.js-hidden #items-list, #angular-items-list {
+    display: none;
+}
+#angular-items-list.showItems {
+    display: block;
 }

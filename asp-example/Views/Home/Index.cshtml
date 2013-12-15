@@ -2,48 +2,95 @@
 @model HomeViewModel
 
 @{
-    ViewBag.Title = "Al's awes todo list";
-    ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+    ViewBag.Title = "Keep track of your tasks";
 }
+
 @section featured {
     <section class="featured">
         <div class="content-wrapper">
             <hgroup class="title">
                 <h1>@ViewBag.Title.</h1>
-                @*<h2>@ViewBag.Message</h2>*@
             </hgroup>
-            <p>
-                Add, remove and complete items below.
-            </p>
+            <p>Add, remove and complete items below.</p>
         </div>
     </section>
 }
-<h3>Todo:</h3>
-@using(var f = Html.BeginForm())
-{
-    @Html.LabelFor(m => m.Description)
-    @Html.TextBoxFor(m => m.Description, new { tabindex = "1", placeholder = "Enter items here :)" })
-    <input type="submit" value="Add" name="AddTodo" />
-}
 
-<ul>
-    @foreach(var item in Model.TodoItems)
+<div data-ng-controller="HomeController">
+    <h3>Todo:</h3>
+    @using (var f = Html.BeginForm())
     {
-        <li id="item-@item.Id" class="todo-item @item.ElapsedDaysClass @(item.Archived ? " archived" : "")">
-            <span class="todo-item-details"><strong>@item.Completed</strong> @item.Description</span>
+        @Html.LabelFor(m => m.Description)
+        @Html.TextBoxFor(m => m.Description, new { tabindex = "1", placeholder = "Enter items here :)" })
+        <input type="submit" value="Add" name="AddTodo" />
+    }
+
+    @* Hidden if JavaScript enabled *@
+    <ul id="items-list">
+        @foreach (var item in Model.TodoItems)
+        {
+            <li id="item-@item.Id" class="todo-item @item.ElapsedDaysClass @(item.Archived ? " archived" : "")">
+                <span class="todo-item-details"><strong>@item.Completed</strong> @item.Description</span>
+                <span class="todo-item-actions">
+                    @using (var f = Html.BeginForm("Archive", "Home"))
+                    {
+                        <input type="hidden" value="@item.Id" name="id" />
+                        <input type="submit" value="Done" name="Archive" />
+                    }
+                    @using (var f = Html.BeginForm("Delete", "Home"))
+                    {
+                        <input type="hidden" value="@item.Id" name="id" />
+                        <input type="submit" value="Delete" name="Delete" />
+                    }
+                </span>
+            </li>
+        }
+    </ul>
+
+    @* Activated by Angular JS if JavaScript is enabled *@
+    <!--<span data-ng-class="show">testing</span>-->
+    <ul id="angular-items-list" data-ng-class="itemsClass">
+        <li data-ng-repeat="todo in todos" id="todo.id" class="todo-item {{todo.archived ? 'archived' : ''}}">
+            @* TODO: elapsed days logic *@
+            <span class="todo-item-details"><strong>{{todo.completed}}</strong> {{todo.description}}</span>
             <span class="todo-item-actions">
                 @using (var f = Html.BeginForm("Archive", "Home"))
                 {
-                    <input type="hidden" value="@item.Id" name="id" />
+                    <input type="hidden" value="todo.id" name="id" />   @* TODO: Not needed but we'll fix this up soon *@
                     <input type="submit" value="Done" name="Archive" />
                 }
                 @using (var f = Html.BeginForm("Delete", "Home"))
                 {
-                    <input type="hidden" value="@item.Id" name="id" />
+                    <input type="hidden" value="todo.id" name="id" />   @* TODO: Not needed but we'll fix this up soon *@
                     <input type="submit" value="Delete" name="Delete" />
                 }
             </span>
         </li>
-    }
-</ul>
+    </ul>
+</div>
 
+<!-- TODO: Move this! -->
+<script type="text/javascript">
+    window.app = angular
+        .module("KeepTrack", [])
+        .controller("HomeController", function ($scope) {
+            $scope.todos = [
+                {
+                    id: 1,
+                    description: "wash the car",
+                    archived: false,
+                    created: "today",
+                    completed: null
+                },
+                {
+                    id: 2,
+                    description: "vacuum the car",
+                    archived: true,
+                    created: "saturday",
+                    completed: "saturday"
+                }
+            ];
+
+            $scope.itemsClass = "showItems";
+        });
+</script>
