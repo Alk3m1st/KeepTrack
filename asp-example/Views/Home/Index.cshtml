@@ -50,18 +50,18 @@
     @* Activated by Angular JS if JavaScript is enabled *@
     <!--<span data-ng-class="show">testing</span>-->
     <ul id="angular-items-list" data-ng-class="itemsClass">
-        <li data-ng-repeat="todo in todos" id="todo.id" class="todo-item {{todo.archived ? 'archived' : ''}}">
+        <li data-ng-repeat="item in todos" id="item.Id" class="todo-item {{item.Archived ? 'archived' : ''}} {{item.ElapsedDaysClass}}">
             @* TODO: elapsed days logic *@
-            <span class="todo-item-details"><strong>{{todo.completed}}</strong> {{todo.description}}</span>
+            <span class="todo-item-details"><strong>{{item.Completed}}</strong> {{item.Description}}</span>
             <span class="todo-item-actions">
                 @using (var f = Html.BeginForm("Archive", "Home"))
                 {
-                    <input type="hidden" value="todo.id" name="id" />   @* TODO: Not needed but we'll fix this up soon *@
+                    <input type="hidden" value="{{item.Id}}" name="id" />   @* TODO: Not needed but we'll fix this up soon *@
                     <input type="submit" value="Done" name="Archive" />
                 }
                 @using (var f = Html.BeginForm("Delete", "Home"))
                 {
-                    <input type="hidden" value="todo.id" name="id" />   @* TODO: Not needed but we'll fix this up soon *@
+                    <input type="hidden" value="{{item.Id}}" name="id" />   @* TODO: Not needed but we'll fix this up soon *@
                     <input type="submit" value="Delete" name="Delete" />
                 }
             </span>
@@ -70,27 +70,4 @@
 </div>
 
 <!-- TODO: Move this! -->
-<script type="text/javascript">
-    window.app = angular
-        .module("KeepTrack", [])
-        .controller("HomeController", function ($scope) {
-            $scope.todos = [
-                {
-                    id: 1,
-                    description: "wash the car",
-                    archived: false,
-                    created: "today",
-                    completed: null
-                },
-                {
-                    id: 2,
-                    description: "vacuum the car",
-                    archived: true,
-                    created: "saturday",
-                    completed: "saturday"
-                }
-            ];
-
-            $scope.itemsClass = "showItems";
-        });
-</script>
+<script type="text/javascript" src="/Scripts/Angular/Controllers/homeController.js"></script>
