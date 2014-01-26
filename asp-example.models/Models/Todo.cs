@@ -9,6 +9,7 @@ namespace asp_example.models.Models
         public bool Archived { get; set; }
         public DateTime Created { get; set; }
         public DateTime? Completed { get; set; }
+        public int DisplayOrder { get; set; }
 
         public Todo()
         {

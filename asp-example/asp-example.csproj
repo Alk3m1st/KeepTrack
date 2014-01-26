@@ -204,6 +204,10 @@
     <Compile Include="Migrations\201312041232126_AddCompletedToTodo.Designer.cs">
       <DependentUpon>201312041232126_AddCompletedToTodo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201401261633137_AddDisplayOrderToTodo.cs" />
+    <Compile Include="Migrations\201401261633137_AddDisplayOrderToTodo.Designer.cs">
+      <DependentUpon>201401261633137_AddDisplayOrderToTodo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Context\TodoContext.cs" />
@@ -341,6 +345,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201312041232126_AddCompletedToTodo.resx">
       <DependentUpon>201312041232126_AddCompletedToTodo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201401261633137_AddDisplayOrderToTodo.resx">
+      <DependentUpon>201401261633137_AddDisplayOrderToTodo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
