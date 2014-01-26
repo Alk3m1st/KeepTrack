@@ -13,6 +13,7 @@ namespace asp_example.Repositories
         void AddTodoFromDescription(string description);
         void ArchiveTodo(int id);
         void DeleteTodo(int id);
+        int Save(Todo item);
     }
 
     // TODO: Add tests
@@ -68,6 +69,17 @@ namespace asp_example.Repositories
                     db.SaveChanges();
                 }
             }
+        }
+
+        public int Save(Todo item)
+        {
+            using (var db = new TodoContext())
+            {
+                var todo = db.Todos.Add(item);
+                db.SaveChanges();
+            }
+
+            return item.Id;
         }
     }
 }
