@@ -18,12 +18,11 @@
 
 <div data-ng-controller="HomeController">
     <h3>Todo:</h3>
-    @using (var f = Html.BeginForm())
-    {
+    <form data-ng-submit="addTodo()" method="post">
         @Html.LabelFor(m => m.Description)
-        @Html.TextBoxFor(m => m.Description, new { tabindex = "1", placeholder = "Enter items here :)" })
-        <input type="submit" value="Add" name="AddTodo" />
-    }
+        @Html.TextBoxFor(m => m.Description, new { tabindex = "1" , placeholder = "Enter items here :)", data_ng_model = "description" })
+        <input type="submit" value="Add" name="addTodo" />
+    </form>
 
     @* Hidden if JavaScript enabled *@
     <ul id="items-list">
@@ -48,7 +47,6 @@
     </ul>
 
     @* Activated by Angular JS if JavaScript is enabled *@
-    <!--<span data-ng-class="show">testing</span>-->
     <ul id="angular-items-list" data-ng-class="itemsClass">
         <li data-ng-repeat="item in todos" id="item.Id" class="todo-item {{item.Archived ? 'archived' : ''}} {{item.ElapsedDaysClass}}">
             @* TODO: elapsed days logic *@
@@ -71,3 +69,4 @@
 
 <!-- TODO: Move this! -->
 <script type="text/javascript" src="/Scripts/Angular/Controllers/homeController.js"></script>
+<script type="text/javascript" src="/Scripts/Angular/Directives/homeDirectives.js"></script>
