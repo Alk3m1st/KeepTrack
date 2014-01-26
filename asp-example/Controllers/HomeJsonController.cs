@@ -27,5 +27,17 @@ namespace asp_example.Controllers
 
             return Json(vm, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public int AddTodo(string description)
+        {
+            var item = new Todo
+            {
+                Description = description
+            };
+            _todoesRepository.Save(item);
+
+            return item.Id;
+        }
     }
 }
