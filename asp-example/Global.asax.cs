@@ -3,6 +3,8 @@ using Autofac;
 using Autofac.Integration.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -27,6 +29,8 @@ namespace asp_example
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
 
+            MigrateToLatestVersion();
+
             RegisterDependencies();
         }
 
@@ -39,6 +43,27 @@ namespace asp_example
 
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+        }
+
+        private void MigrateToLatestVersion()
+        {
+            try
+            {
+                string connectionString = string.Empty;
+                connectionString = System.Configuration.ConfigurationManager
+                                        .ConnectionStrings["DefaultConnection"].ConnectionString;
+
+                var configuration = new asp_example.Migrations.Configuration();
+                configuration.TargetDatabase =
+                    new System.Data.Entity.Infrastructure.DbConnectionInfo(connectionString, "System.Data.SqlClient");
+
+                var migrator = new DbMigrator(configuration);
+                migrator.Update();
+            }
+            catch (Exception e)
+            {
+                Trace.TraceError("Failed to run migration. {0}", e.StackTrace);
+            }
         }
     }
 }
