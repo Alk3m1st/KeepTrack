@@ -11,7 +11,7 @@ namespace asp_example.Repositories
     {
         IList<Todo> GetAllTodoes();
         void AddTodoFromDescription(string description);
-        void ArchiveTodo(int id);
+        Todo ArchiveTodo(int id);
         void DeleteTodo(int id);
         int Save(Todo item);
     }
@@ -25,7 +25,10 @@ namespace asp_example.Repositories
 
             using (var db = new TodoContext())
             {
-                items = db.Todos.ToList();
+                items = db.Todos
+                    .OrderBy(t => t.Id)
+                    .OrderByDescending(t => t.DisplayOrder)
+                    .ToList();
             }
 
             return items;
@@ -41,11 +44,13 @@ namespace asp_example.Repositories
         }
 
 
-        public void ArchiveTodo(int id)
+        public Todo ArchiveTodo(int id)
         {
+            var todo = new Todo();
+
             using (var db = new TodoContext())
             {
-                var todo = db.Todos.Where(t => t.Id == id)
+                todo = db.Todos.Where(t => t.Id == id)
                     .SingleOrDefault();
 
                 if (todo != null)
@@ -55,6 +60,8 @@ namespace asp_example.Repositories
                     db.SaveChanges();
                 }
             }
+
+            return todo;
         }
 
         public void DeleteTodo(int id)
