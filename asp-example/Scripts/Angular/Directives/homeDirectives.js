@@ -1,13 +1,10 @@
 ﻿'use strict';
 
-window.app.directive('itemActions', function () {
+angular.module("KeepTrack").directive('itemActions', function () {
     return {
         restrict: 'A',
-        replace: true,
-        template: '<form action="#" method="post">' +
-            '<input type="hidden" value="{{item.Id}}" name="id">' +
-            '<input type="submit" value="Done" name="Archive" data-ng-click="">' +
-            '</form>',
-        controller: 'homeController'
-    }
+        replace: false,
+        templateUrl: 'Scripts/Angular/Directives/Templates/itemActions.html'
+        //link: function(scope, iElement, iAttrs) {}
+    };
 });

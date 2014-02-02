@@ -51,18 +51,7 @@
         <li data-ng-repeat="item in todos" id="item.Id" class="todo-item {{item.Archived ? 'archived' : ''}} {{item.ElapsedDaysClass}}">
             @* TODO: elapsed days logic *@
             <span class="todo-item-details"><strong>{{item.Completed}}</strong> {{item.Description}}</span>
-            <span class="todo-item-actions">
-                @using (var f = Html.BeginForm("Archive", "Home"))
-                {
-                    <input type="hidden" value="{{item.Id}}" name="id" />   @* TODO: Not needed but we'll fix this up soon *@
-                    <input type="submit" value="Done" name="Archive" />
-                }
-                @using (var f = Html.BeginForm("Delete", "Home"))
-                {
-                    <input type="hidden" value="{{item.Id}}" name="id" />   @* TODO: Not needed but we'll fix this up soon *@
-                    <input type="submit" value="Delete" name="Delete" />
-                }
-            </span>
+            <span class="todo-item-actions" data-item-actions="item"></span>
         </li>
     </ul>
 </div>
