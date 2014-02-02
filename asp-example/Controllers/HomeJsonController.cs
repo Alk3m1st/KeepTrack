@@ -29,7 +29,7 @@ namespace asp_example.Controllers
         }
 
         [HttpPost]
-        public int AddTodo(string description)
+        public JsonResult AddTodo(string description)
         {
             var item = new Todo
             {
@@ -37,7 +37,21 @@ namespace asp_example.Controllers
             };
             _todoesRepository.Save(item);
 
-            return item.Id;
+            return Json(item); // TODO: Should return next display order number
+        }
+
+        [HttpPost]
+        public JsonResult Archive(int id)
+        {
+            var item = _todoesRepository.ArchiveTodo(id);
+
+            return Json(new TodoItemViewModel(item));
+        }
+
+        [HttpPost]
+        public void Delete(int id)
+        {
+            _todoesRepository.DeleteTodo(id);
         }
     }
 }
