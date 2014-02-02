@@ -1,11 +1,12 @@
 ﻿'use strict';
 
-window.app.controller("HomeController", ['$scope', '$http',   /* This format allows minification without variable naming issues */
+angular.module("KeepTrack").controller("HomeController", ['$scope', '$http', '$filter' ,   /* This format allows minification without variable naming issues */
     function ($scope, $http) {
         // Init
         $scope.todos = [];
         $scope.description = '';
 
+        // TODO: Add caching with cacheFactory
         $http.get('/HomeJson')
             .success(function (data) {
                 $scope.todos = data.TodoItems;
@@ -20,13 +21,9 @@ window.app.controller("HomeController", ['$scope', '$http',   /* This format all
                 var item = { Description: this.description };
 
                 $http.post('/HomeJson/AddTodo', item)
-                    .success(function (id) {
-                        console.log('success');
-                        console.log(id);
-                        item.Id = id;
-
-                        // TODO: Add display order and filter by it
-                        $scope.todos.push(item);
+                    .success(function (newItem) {
+                        // TODO: Add display order and filter by it?
+                        $scope.todos.splice(0, 0, newItem); // Put it at the top
 
                         $scope.description = '';
                     })
@@ -35,6 +32,42 @@ window.app.controller("HomeController", ['$scope', '$http',   /* This format all
                         console.log(x);
                     });
             }
+        };
+
+        $scope.archive = function (item) {
+            
+            // TODO: Move to service
+            $http.post('/HomeJson/Archive', item)
+                .success(function (updatedItem) {
+                    var indexToRemove = 0, indexToInsert = 0;
+
+                    console.log(item.Id);
+
+                    for (var i = 0; i < $scope.todos.length; i++) {
+                        if ($scope.todos[i].Id == item.Id) {
+                            indexToRemove = i;
+                        }
+
+                        if ($scope.todos[i].Archived === true) {
+                            indexToInsert = i;
+                        }
+
+                        if (indexToRemove > 0 && indexToInsert > 0) {
+                            $scope.todos.splice(indexToRemove, 1);
+
+                            $scope.todos.splice(indexToInsert, 0, updatedItem);
+
+                            return;
+                        }
+                    }
+                })
+                .error(function () {
+                    console.log("error");
+                });
+        };
+
+        $scope.delete = function (item) {
+            console.log(item);
         };
     }]
 );

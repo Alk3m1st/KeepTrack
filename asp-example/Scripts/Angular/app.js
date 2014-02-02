@@ -1,3 +1,3 @@
 ﻿'use strict';
 
-window.app = angular.module("KeepTrack", []);
+angular.module("KeepTrack", []);
