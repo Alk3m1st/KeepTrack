@@ -31,15 +31,7 @@ namespace asp_example.Controllers.ViewModels
                 .OrderBy(i => i.Archived))
             {
                 // TODO: Use injector?
-                this.AddItem(new TodoItemViewModel
-                {
-                    Archived = item.Archived,
-                    Created = item.Created.GetNiceDateFormat(),
-                    Completed = item.Completed.HasValue ? item.Completed.Value.GetNiceDateFormat() : string.Empty,
-                    ElapsedDaysClass = item.Completed.GetElapsedDaysClass(),
-                    Description = item.Description,
-                    Id = item.Id
-                });
+                this.AddItem(new TodoItemViewModel(item));
             }
         }
     }
