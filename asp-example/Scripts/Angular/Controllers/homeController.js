@@ -17,7 +17,6 @@ angular.module("KeepTrack").controller("HomeController", ['$scope', '$http', '$f
         $scope.addTodo = function () {
             // Put in service
             if (this.description) {
-                console.log(this.description);
                 var item = { Description: this.description };
 
                 $http.post('/HomeJson/AddTodo', item)
@@ -31,11 +30,13 @@ angular.module("KeepTrack").controller("HomeController", ['$scope', '$http', '$f
                         console.log('fail');
                         console.log(x);
                     });
+
+                this.description = '';
             }
         };
 
         $scope.archive = function (item) {
-            item.aboutToArchive = true;
+            item.hide = true;
             
             // TODO: Move to service
             $http.post('/HomeJson/Archive', item)
@@ -61,12 +62,37 @@ angular.module("KeepTrack").controller("HomeController", ['$scope', '$http', '$f
                     }
                 })
                 .error(function () {
+                    item.hide = false;
+                    // do stuff
                     console.log("error");
                 });
         };
 
         $scope.delete = function (item) {
-            console.log(item);
+            item.hide = true;
+
+            // TODO: Move to service
+            $http.post('/HomeJson/Delete', item)
+                .success(function () {
+                    var indexToRemove = 0;
+
+                    for (var i = 0; i < $scope.todos.length; i++) {
+                        if ($scope.todos[i].Id == item.Id) {
+                            indexToRemove = i;
+                        }
+                        
+                        if (indexToRemove > 0) {
+                            $scope.todos.splice(indexToRemove, 1);
+
+                            return;
+                        }
+                    }
+                })
+                .error(function () {
+                    item.hide = false;
+                    // do stuff
+                    console.log("error");
+                });
         };
     }]
 );
