@@ -830,3 +830,10 @@ html.js-hidden #items-list, #angular-items-list {
 #angular-items-list.showItems {
     display: block;
 }
+
+.disable {
+    opacity: 0.4;
+}
+/* .disable .todo-item-actions {
+    hide form and add loader image...
+}*/

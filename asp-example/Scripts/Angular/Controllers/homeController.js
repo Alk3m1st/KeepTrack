@@ -35,13 +35,12 @@ angular.module("KeepTrack").controller("HomeController", ['$scope', '$http', '$f
         };
 
         $scope.archive = function (item) {
+            item.aboutToArchive = true;
             
             // TODO: Move to service
             $http.post('/HomeJson/Archive', item)
                 .success(function (updatedItem) {
                     var indexToRemove = 0, indexToInsert = 0;
-
-                    console.log(item.Id);
 
                     for (var i = 0; i < $scope.todos.length; i++) {
                         if ($scope.todos[i].Id == item.Id) {
@@ -55,7 +54,7 @@ angular.module("KeepTrack").controller("HomeController", ['$scope', '$http', '$f
                         if (indexToRemove > 0 && indexToInsert > 0) {
                             $scope.todos.splice(indexToRemove, 1);
 
-                            $scope.todos.splice(indexToInsert, 0, updatedItem);
+                            $scope.todos.splice(indexToInsert - 1, 0, updatedItem);
 
                             return;
                         }
