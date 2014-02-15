@@ -208,8 +208,11 @@
     <Compile Include="Migrations\201401261633137_AddDisplayOrderToTodo.Designer.cs">
       <DependentUpon>201401261633137_AddDisplayOrderToTodo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201402141707402_AssignTodosToUserProfiles.cs" />
+    <Compile Include="Migrations\201402141707402_AssignTodosToUserProfiles.Designer.cs">
+      <DependentUpon>201402141707402_AssignTodosToUserProfiles.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Context\TodoContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\TodoesRepository.cs" />
@@ -349,6 +352,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201401261633137_AddDisplayOrderToTodo.resx">
       <DependentUpon>201401261633137_AddDisplayOrderToTodo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201402141707402_AssignTodosToUserProfiles.resx">
+      <DependentUpon>201402141707402_AssignTodosToUserProfiles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

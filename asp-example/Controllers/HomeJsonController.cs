@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace asp_example.Controllers
 {
+    [Authorize]
     public class HomeJsonController : Controller
     {
         private ITodoesRepository _todoesRepository;
@@ -21,8 +22,10 @@ namespace asp_example.Controllers
 
         public JsonResult Index()
         {
+            var userName = ControllerContext.HttpContext.User.Identity.Name;
+
             var vm = new HomeViewModel();
-            var items = _todoesRepository.GetAllTodoes();
+            var items = _todoesRepository.GetAllTodoesByUsername(userName);
             vm.AddItems(items);
 
             return Json(vm, JsonRequestBehavior.AllowGet);
@@ -31,11 +34,9 @@ namespace asp_example.Controllers
         [HttpPost]
         public JsonResult AddTodo(string description)
         {
-            var item = new Todo
-            {
-                Description = description
-            };
-            _todoesRepository.Save(item);
+            var userName = ControllerContext.HttpContext.User.Identity.Name;
+
+            var item = _todoesRepository.AddTodoFromDescription(description, userName);
 
             return Json(item); // TODO: Should return next display order number
         }

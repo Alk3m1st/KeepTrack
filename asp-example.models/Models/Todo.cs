@@ -10,6 +10,7 @@ namespace asp_example.models.Models
         public DateTime Created { get; set; }
         public DateTime? Completed { get; set; }
         public int DisplayOrder { get; set; }
+        public UserProfile User { get; set; }
 
         public Todo()
         {

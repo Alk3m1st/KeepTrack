@@ -9,8 +9,8 @@ namespace asp_example.Repositories
 {
     public interface ITodoesRepository
     {
-        IList<Todo> GetAllTodoes();
-        void AddTodoFromDescription(string description);
+        IList<Todo> GetAllTodoesByUsername(string userName);
+        Todo AddTodoFromDescription(string description, string userName);
         Todo ArchiveTodo(int id);
         void DeleteTodo(int id);
         int Save(Todo item);
@@ -19,13 +19,14 @@ namespace asp_example.Repositories
     // TODO: Add tests
     public class TodoesRepository : ITodoesRepository
     {
-        public IList<Todo> GetAllTodoes()
+        public IList<Todo> GetAllTodoesByUsername(string userName)
         {
             var items = new List<Todo>();
 
             using (var db = new TodoContext())
             {
                 items = db.Todos
+                    .Where(t => t.User.UserName == userName)
                     .OrderBy(t => t.Id)
                     .OrderByDescending(t => t.DisplayOrder)
                     .ToList();
@@ -34,13 +35,24 @@ namespace asp_example.Repositories
             return items;
         }
         
-        public void AddTodoFromDescription(string description)
+        public Todo AddTodoFromDescription(string description, string userName)
         {
+            var item = new Todo();
+
             using (var db = new TodoContext())
             {
-                db.Todos.Add(new Todo { Description = description });
+                var user = db.UserProfiles.Where(u => u.UserName == userName).FirstOrDefault();
+
+                if (user == null)
+                    return item; // TODO: return something more meaningful perhaps
+
+                item.Description = description;
+                item.User = user;
+                db.Todos.Add(item);
                 db.SaveChanges();
             }
+
+            return item;
         }
 
 

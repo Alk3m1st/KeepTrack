@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace asp_example.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private ITodoesRepository _todoesRepository;
@@ -21,8 +22,10 @@ namespace asp_example.Controllers
 
         public ActionResult Index()
         {
+            var userName = ControllerContext.HttpContext.User.Identity.Name;
+
             var vm = new HomeViewModel();
-            var items = _todoesRepository.GetAllTodoes();
+            var items = _todoesRepository.GetAllTodoesByUsername(userName);
             vm.AddItems(items);
 
             return View(vm);
@@ -34,7 +37,9 @@ namespace asp_example.Controllers
             if (!ModelState.IsValid)
                 return View(vm);
 
-            _todoesRepository.AddTodoFromDescription(vm.Description);
+            var userName = ControllerContext.HttpContext.User.Identity.Name;
+
+            _todoesRepository.AddTodoFromDescription(vm.Description, userName);
 
             return RedirectToAction("Index");
         }
@@ -55,16 +60,18 @@ namespace asp_example.Controllers
             return RedirectToAction("Index");
         }
 
+        [AllowAnonymous]
         public ActionResult About()
         {
-            ViewBag.Message = "Your app description page.";
+            ViewBag.Message = "A|lk3my About Page.";
 
             return View();
         }
 
+        [AllowAnonymous]
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "A|k3my Contact Page.";
 
             return View();
         }
