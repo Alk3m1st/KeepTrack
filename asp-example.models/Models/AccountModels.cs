@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Globalization;
-using System.Web.Security;
+//using System.Web.Security;
 
-namespace asp_example.Models
+namespace asp_example.models.Models
 {
     [Table("UserProfile")]
     public class UserProfile

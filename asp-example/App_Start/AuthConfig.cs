@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Web.WebPages.OAuth;
-using asp_example.Models;
+using asp_example.models.Models;
 
 namespace asp_example
 {
