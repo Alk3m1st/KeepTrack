@@ -29,19 +29,19 @@
         @foreach (var item in Model.TodoItems)
         {
             <li id="item-@item.Id" class="todo-item @item.ElapsedDaysClass @(item.Archived ? " archived" : "")">
-                <span class="todo-item-details"><strong>@item.Completed</strong> @item.Description</span>
                 <span class="todo-item-actions">
                     @using (var f = Html.BeginForm("Archive", "Home"))
                     {
                         <input type="hidden" value="@item.Id" name="id" />
-                        <input type="submit" value="Done" name="Archive" />
+                        <button type="submit" value="Done" name="Archive" class="btn btn-sm"><span class="glyphicon glyphicon-ok"></span></button>
                     }
                     @using (var f = Html.BeginForm("Delete", "Home"))
                     {
                         <input type="hidden" value="@item.Id" name="id" />
-                        <input type="submit" value="Delete" name="Delete" />
+                        <button type="submit" value="Delete" name="Delete" class="btn btn-sm"><span class="glyphicon glyphicon-remove"></span></button>
                     }
                 </span>
+                <span class="todo-item-details"><strong>@item.Completed</strong> @item.Description</span>
             </li>
         }
     </ul>
@@ -50,8 +50,8 @@
     <ul id="angular-items-list" data-ng-class="itemsClass">
         <li data-ng-repeat="item in todos" id="item.Id" class="todo-item {{item.Archived ? 'archived' : ''}} {{item.ElapsedDaysClass}}">
             @* TODO: elapsed days logic *@
-            <span class="todo-item-details {{item.hide ? 'disable' : ''}}"><strong>{{item.Completed}}</strong> {{item.Description}}</span>
             <span class="todo-item-actions" data-item-actions="item"></span>
+            <span class="todo-item-details {{item.hide ? 'disable' : ''}}"><strong>{{item.Completed}}</strong> {{item.Description}}</span>
         </li>
     </ul>
 </div>

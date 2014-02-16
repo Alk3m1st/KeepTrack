@@ -1,8 +1,8 @@
 ﻿<form data-ng-submit="archive(item)" method="post">
     <input type="hidden" value="{{item.Id}}" name="id">
-    <input type="submit" value="Done" name="Archive">
+    <button type="submit" value="Done" name="Archive" class="btn btn-sm"><span class="glyphicon glyphicon-ok"></span></button>
 </form>
 <form data-ng-submit="delete(item)" method="post">
     <input type="hidden" value="{{item.Id}}" name="id" />
-    <input type="submit" value="Delete" name="Delete" />
+    <button type="submit" value="Delete" name="Delete" class="btn btn-sm"><span class="glyphicon glyphicon-remove"></span></button>
 </form>

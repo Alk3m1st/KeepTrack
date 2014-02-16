@@ -477,18 +477,8 @@ textarea {
         display: inline;
     }
 
-    .todo-item form input[type='submit'] {
-        border: #95E88E;
-        background: #649C5F;
-        font-weight: normal;
-        color: #FFFFFF;
-        font-size: 1em;
-        margin: 0;
-        padding: 1px 5px;
-    }
-
-    .todo-item form input[type='submit']:hover {
-        background: #E08FA2;
+    li.todo-item {
+        padding-bottom: 5px;
     }
 
     li.todo-item span.todo-item-details {
@@ -498,14 +488,13 @@ textarea {
     }
 
     li.todo-item span.todo-item-actions {
-        transition: opacity 1s, margin-left 1s;
-        -webkit-transition: opacity 1s, margin-left 1s;
-        opacity: 0;
-        z-index: 1;
-        margin-left: -50px;
-        position: relative;
+        padding-right: 10px;
     }
-    
+
+    li.todo-item:hover span.todo-item-actions {
+        padding-right: 20px;
+    }
+
     li.todo-item:hover span.todo-item-actions, li.todo-item:active span.todo-item-actions, li.todo-item:focus span.todo-item-actions {
         opacity: 1;
         margin-left: 0;
