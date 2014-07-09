@@ -231,6 +231,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\TableStorageRepository.cs" />
     <Compile Include="Repositories\TodoesRepository.cs" />
     <Compile Include="Utils\DateDisplayHelpers.cs" />
     <Compile Include="Utils\TableStorageHelpers.cs" />
