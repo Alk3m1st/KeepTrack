@@ -98,6 +98,7 @@
     <Compile Include="Migrations\MigrationsTests.cs" />
     <Compile Include="Utils\DateDisplayHelpersTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\TableStorageHelpersTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
@@ -106,6 +107,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\asp-example.azure\asp-example.azure.csproj">
+      <Project>{60b09c77-75b8-4888-8180-d3f3cbb8e644}</Project>
+      <Name>asp-example.azure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\asp-example.models\asp-example.models.csproj">
       <Project>{5df50e56-6570-44e5-a1d1-2a88784b7522}</Project>
       <Name>asp-example.models</Name>
