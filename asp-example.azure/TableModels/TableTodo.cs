@@ -15,7 +15,7 @@ namespace asp_example.models.TableModels
         public DateTime Created { get; set; }
         public DateTime? Completed { get; set; }
         public int DisplayOrder { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public bool Deleted { get; set; }
 
         public TableTodo()
@@ -23,9 +23,9 @@ namespace asp_example.models.TableModels
             Created = DateTime.Now;
         }
 
-        public TableTodo(int userId, string description) : this()
+        public TableTodo(string userId, string description) : this()
         {
-            this.Id = new Guid();
+            this.Id = Guid.NewGuid();
             this.RowKey = this.Id.ToString();
 
             this.UserId = userId;
