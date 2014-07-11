@@ -24,7 +24,7 @@ angular.module("KeepTrack").controller("HomeController", ['$scope', '$http', '$f
                         // TODO: Add display order and filter by it?
                         $scope.todos.splice(0, 0, newItem); // Put it at the top
 
-                        $scope.description = '';
+                        //$scope.description = '';
                     })
                     .error(function (x) {
                         console.log('fail');
@@ -70,6 +70,8 @@ angular.module("KeepTrack").controller("HomeController", ['$scope', '$http', '$f
 
         $scope.delete = function (item) {
             item.hide = true;
+
+            // pop-up to verify delete somehow...
 
             // TODO: Move to service
             $http.post('/HomeJson/Delete', item)
