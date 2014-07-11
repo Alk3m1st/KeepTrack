@@ -40,7 +40,7 @@ namespace asp_example
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
 
             builder.RegisterType<TodoesRepository>().As<ITodoesRepository>().InstancePerHttpRequest();
-            builder.RegisterType<TableStorageRepository>().As<ITableStorageRepository>().InstancePerHttpRequest();
+            builder.RegisterType<TableTodoRepository>().As<ITableTodoRepository>().InstancePerHttpRequest();
 
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

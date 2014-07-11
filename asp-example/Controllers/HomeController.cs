@@ -1,5 +1,6 @@
 ﻿using asp_example.Controllers.ViewModels;
 using asp_example.models.Models;
+using asp_example.models.TableModels;
 using asp_example.Models.Context;
 using asp_example.Repositories;
 using System;
@@ -13,11 +14,12 @@ namespace asp_example.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-        private ITodoesRepository _todoesRepository;
+        // TODO: Hook up a service and some queues
+        private ITableTodoRepository _tableStorageRepository;
 
-        public HomeController(ITodoesRepository todoesRepository)
+        public HomeController(ITableTodoRepository tableStorageRepository)
         {
-            _todoesRepository = todoesRepository;
+            _tableStorageRepository = tableStorageRepository;
         }
 
         public ActionResult Index()
@@ -25,7 +27,7 @@ namespace asp_example.Controllers
             var userName = ControllerContext.HttpContext.User.Identity.Name;
 
             var vm = new HomeViewModel();
-            var items = _todoesRepository.GetAllTodoesByUsername(userName);
+            var items = _tableStorageRepository.Get<TableTodo>(userName);
             vm.AddItems(items);
 
             return View(vm);
@@ -38,24 +40,23 @@ namespace asp_example.Controllers
                 return View(vm);
 
             var userName = ControllerContext.HttpContext.User.Identity.Name;
-
-            _todoesRepository.AddTodoFromDescription(vm.Description, userName);
-
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public ActionResult Archive(int id)
-        {
-            _todoesRepository.ArchiveTodo(id);
+            _tableStorageRepository.Insert<TableTodo>(new TableTodo(userName, vm.Description));
 
             return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public ActionResult Delete(int id)
+        public ActionResult Archive(string id)
         {
-            _todoesRepository.DeleteTodo(id);
+            _tableStorageRepository.Archive(new Guid(id), ControllerContext.HttpContext.User.Identity.Name);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Delete(string id)
+        {
+            _tableStorageRepository.Delete<TableTodo>(new Guid(id), ControllerContext.HttpContext.User.Identity.Name);
 
             return RedirectToAction("Index");
         }
