@@ -17,6 +17,11 @@ namespace asp_example.Controllers
         // TODO: Hook up a service and some queues
         private ITableTodoRepository _tableStorageRepository;
 
+        private string getUserName()
+        {
+            return ControllerContext.HttpContext.User.Identity.Name;
+        }
+
         public HomeController(ITableTodoRepository tableStorageRepository)
         {
             _tableStorageRepository = tableStorageRepository;
@@ -24,10 +29,8 @@ namespace asp_example.Controllers
 
         public ActionResult Index()
         {
-            var userName = ControllerContext.HttpContext.User.Identity.Name;
-
             var vm = new HomeViewModel();
-            var items = _tableStorageRepository.Get<TableTodo>(userName);
+            var items = _tableStorageRepository.Get<TableTodo>(getUserName());
             vm.AddItems(items);
 
             return View(vm);
@@ -39,8 +42,7 @@ namespace asp_example.Controllers
             if (!ModelState.IsValid)
                 return View(vm);
 
-            var userName = ControllerContext.HttpContext.User.Identity.Name;
-            _tableStorageRepository.Insert<TableTodo>(new TableTodo(userName, vm.Description));
+            _tableStorageRepository.Insert<TableTodo>(new TableTodo(getUserName(), vm.Description));
 
             return RedirectToAction("Index");
         }
@@ -48,7 +50,7 @@ namespace asp_example.Controllers
         [HttpPost]
         public ActionResult Archive(string id)
         {
-            _tableStorageRepository.Archive(new Guid(id), ControllerContext.HttpContext.User.Identity.Name);
+            _tableStorageRepository.Archive(new Guid(id), getUserName());
 
             return RedirectToAction("Index");
         }
@@ -56,7 +58,7 @@ namespace asp_example.Controllers
         [HttpPost]
         public ActionResult Delete(string id)
         {
-            _tableStorageRepository.Delete<TableTodo>(new Guid(id), ControllerContext.HttpContext.User.Identity.Name);
+            _tableStorageRepository.Delete<TableTodo>(new Guid(id), getUserName());
 
             return RedirectToAction("Index");
         }
@@ -75,6 +77,32 @@ namespace asp_example.Controllers
             ViewBag.Message = "A|k3my Contact Page.";
 
             return View();
+        }
+
+        public ActionResult Migration()
+        {
+            // Grose service locator but only for the one off migration
+            var todoRepo = DependencyResolver.Current.GetService<ITodoesRepository>();
+
+            var allOldTodos = todoRepo.GetAllTodoesByUsername(getUserName());
+            var allTableTodos = _tableStorageRepository.Get<TableTodo>(getUserName());
+
+            var todosForMigration = allOldTodos
+                .Where(t => !allTableTodos.Any(att => att.Created == t.Created))
+                .Select(t => new TableTodo(t.Archived,
+                    t.Completed,
+                    t.Created,
+                    t.Description,
+                    t.DisplayOrder,
+                    getUserName()))
+                .ToList();
+
+            foreach (var todo in todosForMigration)
+            {
+                _tableStorageRepository.InsertOrReplace<TableTodo>(todo);
+            }
+
+            return (View(todosForMigration));
         }
     }
 }

@@ -1,0 +1,21 @@
+﻿@model IList<asp_example.models.TableModels.TableTodo>
+
+@{
+    ViewBag.Title = "Migration";
+}
+
+<h2>Migration</h2>
+
+@if(!Model.Any())
+{
+    <p>Nothing to migrate! :)</p>
+}
+else
+{
+    <ul>
+    @foreach (var item in Model)
+    {
+        <li>@item.Id - @item.UserId - @item.Created - @item.Archived - @item.Completed - @item.Description</li>
+    }
+    </ul>
+}
