@@ -26,6 +26,7 @@ namespace asp_example.Repositories
                 return;
 
             entity.Archived = true;
+            entity.Completed = DateTime.UtcNow;
 
             base.InsertOrReplace(entity);
         }

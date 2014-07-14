@@ -22,7 +22,7 @@ namespace asp_example.Controllers.ViewModels
         {
             Archived = item.Archived;
             Created = item.Created.GetNiceDateFormat();
-            Completed = item.Completed.HasValue ? item.Completed.Value.GetNiceDateFormat() : string.Empty;
+            Completed = item.Completed.HasValue ? item.Completed.Value.AddHours(8).GetNiceDateFormat() : string.Empty;
             ElapsedDaysClass = item.Completed.GetElapsedDaysClass();
             Description = item.Description;
             Id = item.Id.ToString();
