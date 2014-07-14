@@ -42,7 +42,9 @@ angular.module("KeepTrack").controller("HomeController", ['$scope', '$http', '$f
             $http.post('/HomeJson/Archive', item)
                 .success(function (updatedItem) {
                     var indexToRemove = 0, indexToInsert = 0;
+                    console.log("returned");
 
+                    // Reorder the list
                     for (var i = 0; i < $scope.todos.length; i++) {
                         if ($scope.todos[i].Id == item.Id) {
                             indexToRemove = i;
@@ -52,7 +54,7 @@ angular.module("KeepTrack").controller("HomeController", ['$scope', '$http', '$f
                             indexToInsert = i;
                         }
 
-                        if (indexToRemove > 0 && indexToInsert > 0) {
+                        if (indexToRemove >= 0 && indexToInsert > 0) {
                             $scope.todos.splice(indexToRemove, 1);
 
                             $scope.todos.splice(indexToInsert - 1, 0, updatedItem);
