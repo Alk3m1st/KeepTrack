@@ -1,7 +1,7 @@
 ﻿'use strict';
 
-angular.module("KeepTrack").controller("HomeController", ['$scope', '$http', '$filter' ,   /* This format allows minification without variable naming issues */
-    function ($scope, $http) {
+(function () {
+    function HomeController($scope, $http) {
         // Init
         $scope.todos = [];
         $scope.description = '';
@@ -37,7 +37,7 @@ angular.module("KeepTrack").controller("HomeController", ['$scope', '$http', '$f
 
         $scope.archive = function (item) {
             item.hide = true;
-            
+
             // TODO: Move to service
             $http.post('/HomeJson/Archive', item)
                 .success(function (updatedItem) {
@@ -84,7 +84,7 @@ angular.module("KeepTrack").controller("HomeController", ['$scope', '$http', '$f
                         if ($scope.todos[i].Id == item.Id) {
                             indexToRemove = i;
                         }
-                        
+
                         if (indexToRemove > 0) {
                             $scope.todos.splice(indexToRemove, 1);
 
@@ -98,5 +98,8 @@ angular.module("KeepTrack").controller("HomeController", ['$scope', '$http', '$f
                     console.log("error");
                 });
         };
-    }]
-);
+    }
+
+    angular.module("KeepTrack")
+        .controller("HomeController", ['$scope', '$http', '$filter', HomeController]);
+}());
