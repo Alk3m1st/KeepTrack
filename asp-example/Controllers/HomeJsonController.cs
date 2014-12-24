@@ -12,7 +12,7 @@ using System.Web.Mvc;
 namespace asp_example.Controllers
 {
     [Authorize]
-    public class HomeJsonController : Controller
+    public class HomeJsonController : Controller    // TODO swap to Web ApiController
     {
         private ITableTodoRepository _tableTodoRepository;
 

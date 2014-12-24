@@ -1,7 +1,4 @@
-﻿@using asp_example.Controllers.ViewModels
-@model HomeViewModel
-
-@{
+﻿@{
     ViewBag.Title = "Keep track of your tasks";
 }
 
@@ -25,30 +22,6 @@
         <input type="submit" value="Add" name="addTodo" />
     </form>
 
-
-    @* Hidden if JavaScript enabled *@
-    <ul id="items-list">
-        @foreach (var item in Model.TodoItems)
-        {
-            <li id="item-@item.Id" class="todo-item @item.ElapsedDaysClass @(item.Archived ? " archived" : "")">
-                <span class="todo-item-actions">
-                    @using (var f = Html.BeginForm("Archive", "Home"))
-                    {
-                        <input type="hidden" value="@item.Id" name="id" />
-                        <button type="submit" value="Done" name="Archive" class="btn btn-sm"><span class="glyphicon glyphicon-ok"></span></button>
-                    }
-                    @using (var f = Html.BeginForm("Delete", "Home"))
-                    {
-                        <input type="hidden" value="@item.Id" name="id" />
-                        <button type="submit" value="Delete" name="Delete" class="btn btn-sm"><span class="glyphicon glyphicon-remove"></span></button>
-                    }
-                </span>
-                <span class="todo-item-details"><strong>@item.Completed</strong> @item.Description</span>
-            </li>
-        }
-    </ul>
-
-    @* Activated by Angular JS if JavaScript is enabled *@
     <ul id="angular-items-list" data-ng-class="home.itemsClass">
         <li data-ng-repeat="item in home.todos" id="item.Id" class="todo-item {{item.Archived ? 'archived' : ''}} {{item.ElapsedDaysClass}}">
             @* TODO: elapsed days logic *@

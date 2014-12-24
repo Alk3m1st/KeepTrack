@@ -29,38 +29,7 @@ namespace asp_example.Controllers
 
         public ActionResult Index()
         {
-            var vm = new HomeViewModel();
-            var items = _tableStorageRepository.Get<TableTodo>(getUserName());
-            vm.AddItems(items);
-
-            return View(vm);
-        }
-
-        [HttpPost]
-        public ActionResult Index(HomeViewModel vm)
-        {
-            if (!ModelState.IsValid)
-                return View(vm);
-
-            _tableStorageRepository.Insert<TableTodo>(new TableTodo(getUserName(), vm.Description));
-
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public ActionResult Archive(string id)
-        {
-            _tableStorageRepository.Archive(new Guid(id), getUserName());
-
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public ActionResult Delete(string id)
-        {
-            _tableStorageRepository.Delete<TableTodo>(new Guid(id), getUserName());
-
-            return RedirectToAction("Index");
+            return View();
         }
 
         [AllowAnonymous]
