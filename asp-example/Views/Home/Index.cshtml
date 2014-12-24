@@ -52,7 +52,11 @@
     <ul id="angular-items-list" data-ng-class="home.itemsClass">
         <li data-ng-repeat="item in home.todos" id="item.Id" class="todo-item {{item.Archived ? 'archived' : ''}} {{item.ElapsedDaysClass}}">
             @* TODO: elapsed days logic *@
-            <span class="todo-item-actions" data-item-actions="item"></span>
+            <span class="todo-item-actions" 
+                  item-actions
+                  data-ng-attr-todo-item="item"
+                  data-ng-attr-on-archive="home.archive(item)"
+                  data-ng-attr-on-delete="home.delete(item)"></span>
             <span class="todo-item-details {{item.hide ? 'disable' : ''}}"><strong>{{item.Completed}}</strong> {{item.Description}}</span>
         </li>
     </ul>
