@@ -16,13 +16,15 @@
     </section>
 }
 
-<div data-ng-controller="HomeController">
+<div data-ng-controller="HomeController as home">
     <h3>Todo:</h3>
-    <form data-ng-submit="addTodo()" method="post">
-        @Html.LabelFor(m => m.Description)
-        @Html.TextBoxFor(m => m.Description, new { tabindex = "1" , placeholder = "Enter items here :)", data_ng_model = "description" })
+    <form data-ng-submit="home.addTodo()" method="post">
+        <label for="Description">Description</label>
+        <input data-ng-model="home.description" id="Description" name="Description" 
+               placeholder="Enter items here :)" tabindex="1" type="text" value="" >
         <input type="submit" value="Add" name="addTodo" />
     </form>
+
 
     @* Hidden if JavaScript enabled *@
     <ul id="items-list">
@@ -47,8 +49,8 @@
     </ul>
 
     @* Activated by Angular JS if JavaScript is enabled *@
-    <ul id="angular-items-list" data-ng-class="itemsClass">
-        <li data-ng-repeat="item in todos" id="item.Id" class="todo-item {{item.Archived ? 'archived' : ''}} {{item.ElapsedDaysClass}}">
+    <ul id="angular-items-list" data-ng-class="home.itemsClass">
+        <li data-ng-repeat="item in home.todos" id="item.Id" class="todo-item {{item.Archived ? 'archived' : ''}} {{item.ElapsedDaysClass}}">
             @* TODO: elapsed days logic *@
             <span class="todo-item-actions" data-item-actions="item"></span>
             <span class="todo-item-details {{item.hide ? 'disable' : ''}}"><strong>{{item.Completed}}</strong> {{item.Description}}</span>
