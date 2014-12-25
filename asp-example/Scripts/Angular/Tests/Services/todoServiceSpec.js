@@ -163,6 +163,7 @@ describe('TodoService', function () {
         expect(todos[1].Id).toBe('b6d17f69-f40b-4d7e-bd1b-322cdf862efa');
         expect(todos[2].Id).toBe('0124e316-8ace-48d8-bd3a-3e7a2f1dba32');
         expect(todos[3].Id).toBe('675ac400-da4f-4630-9076-b4e64f98b41f');
+        expect(item.hide).toBe(false);
     });
 
     it("Should add a todo", function () {

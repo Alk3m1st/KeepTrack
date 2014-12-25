@@ -18,8 +18,10 @@
         }
 
         TodoService.archiveTodo = function (item, todos) {
-            if (item.Archived === true)
+            if (item.Archived === true) {
+                item.hide = false;
                 return;
+            }
 
             $http.post('/HomeJson/Archive', item)
                 .success(function (updatedItem) {
