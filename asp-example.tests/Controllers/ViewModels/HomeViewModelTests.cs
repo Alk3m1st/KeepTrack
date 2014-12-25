@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using FizzWare.NBuilder;
 using asp_example.Controllers.ViewModels;
 using asp_example.models.Models;
+using asp_example.models.TableModels;
 
 namespace asp_example.tests.Controllers.ViewModels
 {
@@ -16,7 +17,8 @@ namespace asp_example.tests.Controllers.ViewModels
         [Test]
         public void Add_item_from_todo_entities()
         {
-            var todo = Builder<TodoItemViewModel>.CreateNew().Build();
+            var tableTodo = Builder<TableTodo>.CreateNew().Build();
+            var todo = new TodoItemViewModel(tableTodo);
 
             var vm = new HomeViewModel();
             vm.AddItem(todo);
