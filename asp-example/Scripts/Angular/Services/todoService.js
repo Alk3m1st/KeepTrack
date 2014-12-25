@@ -1,4 +1,4 @@
-﻿'use strict'
+﻿'use strict';
 
 (function () {
     function TodoService($http) {
@@ -18,10 +18,13 @@
         }
 
         TodoService.archiveTodo = function (item, todos) {
+            if (item.Archived === true)
+                return;
+
             $http.post('/HomeJson/Archive', item)
                 .success(function (updatedItem) {
                     var indexToRemove = 0, indexToInsert = 0;
-                    
+
                     // Reorder the list
                     for (var i = 0; i < todos.length; i++) {
                         if (todos[i].Id == item.Id) {
@@ -46,12 +49,12 @@
                 });
         }
 
-        TodoService.delete = function (item, todos) {
-            $http.post('/HomeJson/Delete', item)
+        TodoService.deleteTodo = function (item, todos) {
+            $http.post('/HomeJson/Delete', item)    // TODO: Use correct HTTPverb
                 .success(function () {
-                    var indexToRemove = 0;
+                    var i, indexToRemove = -1;
 
-                    for (var i = 0; i < todos.length; i++) {
+                    for (i = 0; i < todos.length; i++) {
                         if (todos[i].Id === item.Id) {
                             indexToRemove = i;
                         }

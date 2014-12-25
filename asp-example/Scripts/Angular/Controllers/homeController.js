@@ -32,7 +32,7 @@
         this.delete = function (item) {
             if (confirm("Are you sure you want to delete this todo?")) {
                 item.hide = true;
-                TodoService.delete(item, self.todos);
+                TodoService.deleteTodo(item, self.todos);
             }
         };
     }

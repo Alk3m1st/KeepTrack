@@ -298,13 +298,18 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="Scripts\Angular\angular.min.js.map" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\Angular\angular.min.js" />
     <Content Include="Scripts\Angular\app.js" />
     <Content Include="Scripts\Angular\Controllers\homeController.js" />
     <Content Include="Scripts\Angular\Directives\homeDirectives.js" />
     <Content Include="Scripts\Angular\Directives\Templates\itemActions.html" />
+    <Content Include="Scripts\Angular\karma.conf.js" />
     <Content Include="Scripts\Angular\Services\todoService.js" />
+    <Content Include="Scripts\Angular\Tests\Libs\angular-mocks.js" />
+    <Content Include="Scripts\Angular\Tests\Libs\sinon.js" />
+    <Content Include="Scripts\Angular\Tests\Services\todoServiceSpec.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
