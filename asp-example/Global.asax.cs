@@ -1,4 +1,5 @@
-﻿using asp_example.Repositories;
+﻿using asp_example.Config.AutoFac;
+using asp_example.Repositories;
 using Autofac;
 using Autofac.Integration.Mvc;
 using System;
@@ -41,6 +42,7 @@ namespace asp_example
 
             builder.RegisterType<TodoesRepository>().As<ITodoesRepository>().InstancePerHttpRequest();
             builder.RegisterType<TableTodoRepository>().As<ITableTodoRepository>().InstancePerHttpRequest();
+            builder.RegisterModule(new QueryHandlersModule());
 
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
