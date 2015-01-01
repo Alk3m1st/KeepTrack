@@ -1,7 +1,10 @@
 ﻿using asp_example.Controllers.ViewModels;
+using asp_example.Handlers.Queries;
+using asp_example.interfaces.Queries;
 using asp_example.models.Models;
 using asp_example.models.TableModels;
 using asp_example.Models.Context;
+using asp_example.Queries;
 using asp_example.Repositories;
 using System;
 using System.Collections.Generic;
@@ -15,10 +18,13 @@ namespace asp_example.Controllers
     public class HomeJsonController : Controller    // TODO swap to Web ApiController
     {
         private ITableTodoRepository _tableTodoRepository;
+        private IQueryHandler<GetItemsByUserNameQuery, IEnumerable<TableTodo>> _itemsByUserNameQueryHandler;
 
-        public HomeJsonController(ITableTodoRepository tableTodoRepository)
+        public HomeJsonController(ITableTodoRepository tableTodoRepository,
+            IQueryHandler<GetItemsByUserNameQuery, IEnumerable<TableTodo>> itemsByUserNameQueryHandler)
         {
             _tableTodoRepository = tableTodoRepository;
+            _itemsByUserNameQueryHandler = itemsByUserNameQueryHandler;
         }
 
         public JsonResult Index()
@@ -26,8 +32,9 @@ namespace asp_example.Controllers
             var userName = ControllerContext.HttpContext.User.Identity.Name;
 
             var vm = new HomeViewModel();
-            var items = _tableTodoRepository.Get<TableTodo>(userName);
-            vm.AddItems(items);
+            var query = new GetItemsByUserNameQuery(userName);
+            var items = _itemsByUserNameQueryHandler.Handle(query);
+            vm.AddItems(items.ToList());
 
             return Json(vm, JsonRequestBehavior.AllowGet);
         }
