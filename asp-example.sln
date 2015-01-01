@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2013 for Web
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "asp-example", "asp-example\asp-example.csproj", "{5A770C70-899A-43A9-A3CB-571610C882FD}"
 EndProject
@@ -15,6 +15,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "asp-example.models", "asp-example.models\asp-example.models.csproj", "{5DF50E56-6570-44E5-A1D1-2A88784B7522}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "asp-example.azure", "asp-example.azure\asp-example.azure.csproj", "{60B09C77-75B8-4888-8180-D3F3CBB8E644}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "asp-example.interfaces", "asp-example.interfaces\asp-example.interfaces.csproj", "{9149B3D6-C143-4B66-93F0-CFA963FDDEDF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +40,10 @@ Global
 		{60B09C77-75B8-4888-8180-D3F3CBB8E644}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60B09C77-75B8-4888-8180-D3F3CBB8E644}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60B09C77-75B8-4888-8180-D3F3CBB8E644}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9149B3D6-C143-4B66-93F0-CFA963FDDEDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9149B3D6-C143-4B66-93F0-CFA963FDDEDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9149B3D6-C143-4B66-93F0-CFA963FDDEDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9149B3D6-C143-4B66-93F0-CFA963FDDEDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
