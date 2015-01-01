@@ -11,6 +11,9 @@
         $http.get('/HomeJson')
             .success(function (data) {
                 self.todos = data.TodoItems;
+            })
+            .error(function () {
+                self.description = "Error loading Todos...";
             });
 
         this.itemsClass = "showItems";  // Used currently to prevent FoUC
