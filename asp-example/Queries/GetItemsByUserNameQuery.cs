@@ -9,6 +9,11 @@ namespace asp_example.Queries
 {
     public class GetItemsByUserNameQuery : IQuery<IEnumerable<TableTodo>>
     {
-        public string UserName { get; set; }
+        public string UserName { get; private set; }
+
+        public GetItemsByUserNameQuery(string userName)
+        {
+            UserName = userName;
+        }
     }
 }

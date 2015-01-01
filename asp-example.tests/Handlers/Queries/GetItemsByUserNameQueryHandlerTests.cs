@@ -36,7 +36,7 @@ namespace asp_example.tests.Handlers.Queries
         [Test]
         public void HandleQuery()
         {
-            var query = new GetItemsByUserNameQuery { UserName = UserName };
+            var query = new GetItemsByUserNameQuery(UserName);
             var handler = new GetItemsByUserNameQueryHandler();
 
             var results = handler.Handle(query);
