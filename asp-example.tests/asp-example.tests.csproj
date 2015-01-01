@@ -95,6 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ViewModels\HomeViewModelTests.cs" />
+    <Compile Include="Handlers\Queries\GetItemsByUserNameQueryHandlerTests.cs" />
     <Compile Include="Migrations\MigrationsTests.cs" />
     <Compile Include="Utils\DateDisplayHelpersTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -110,6 +111,10 @@
     <ProjectReference Include="..\asp-example.azure\asp-example.azure.csproj">
       <Project>{60b09c77-75b8-4888-8180-d3f3cbb8e644}</Project>
       <Name>asp-example.azure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\asp-example.interfaces\asp-example.interfaces.csproj">
+      <Project>{9149b3d6-c143-4b66-93f0-cfa963fddedf}</Project>
+      <Name>asp-example.interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\asp-example.models\asp-example.models.csproj">
       <Project>{5df50e56-6570-44e5-a1d1-2a88784b7522}</Project>
