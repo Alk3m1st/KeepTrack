@@ -95,6 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ViewModels\HomeViewModelTests.cs" />
+    <Compile Include="Handlers\Commands\AddTodoCommandHandlerTests.cs" />
     <Compile Include="Handlers\Queries\GetItemsByUserNameQueryHandlerTests.cs" />
     <Compile Include="Migrations\MigrationsTests.cs" />
     <Compile Include="Utils\DateDisplayHelpersTests.cs" />

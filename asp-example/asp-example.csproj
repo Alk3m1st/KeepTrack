@@ -209,6 +209,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Handlers\Commands\AddTodoCommandHandler.cs" />
     <Compile Include="Handlers\Queries\GetItemsByUserNameQueryHandler.cs" />
     <Compile Include="Migrations\201311251229100_InitialSetUp.cs" />
     <Compile Include="Migrations\201311251229100_InitialSetUp.Designer.cs">
