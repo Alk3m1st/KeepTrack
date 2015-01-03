@@ -1,5 +1,7 @@
-﻿using asp_example.Controllers.ViewModels;
+﻿using asp_example.Commands;
+using asp_example.Controllers.ViewModels;
 using asp_example.Handlers.Queries;
+using asp_example.interfaces.Commands;
 using asp_example.interfaces.Queries;
 using asp_example.models.Models;
 using asp_example.models.TableModels;
@@ -19,12 +21,15 @@ namespace asp_example.Controllers
     {
         private ITableTodoRepository _tableTodoRepository;
         private IQueryHandler<GetItemsByUserNameQuery, IEnumerable<TableTodo>> _itemsByUserNameQueryHandler;
+        private ICommandHandler<AddTodoCommand> _addTodoCommandHandler;
 
         public HomeJsonController(ITableTodoRepository tableTodoRepository,
-            IQueryHandler<GetItemsByUserNameQuery, IEnumerable<TableTodo>> itemsByUserNameQueryHandler)
+            IQueryHandler<GetItemsByUserNameQuery, IEnumerable<TableTodo>> itemsByUserNameQueryHandler,
+            ICommandHandler<AddTodoCommand> addTodoCommandHandler)
         {
             _tableTodoRepository = tableTodoRepository;
             _itemsByUserNameQueryHandler = itemsByUserNameQueryHandler;
+            _addTodoCommandHandler = addTodoCommandHandler;
         }
 
         public JsonResult Index()
@@ -43,10 +48,11 @@ namespace asp_example.Controllers
         public JsonResult AddTodo(string description)
         {
             var userName = ControllerContext.HttpContext.User.Identity.Name;
-            var todo = new TableTodo(userName, description);
-            _tableTodoRepository.Insert<TableTodo>(todo);
 
-            return Json(_tableTodoRepository.Get<TableTodo>(todo.Id, userName)); // TODO: Should just return next display order number? Or get updated by another mechanism like SignalR
+            var command = new AddTodoCommand(userName, description);
+            _addTodoCommandHandler.Handle(command);
+
+            return Json(_tableTodoRepository.Get<TableTodo>(command.Id, userName)); // TODO: Should just return next display order number? Or get updated by another mechanism like SignalR
         }
 
         [HttpPost]

@@ -43,6 +43,7 @@ namespace asp_example
             builder.RegisterType<TodoesRepository>().As<ITodoesRepository>().InstancePerHttpRequest();
             builder.RegisterType<TableTodoRepository>().As<ITableTodoRepository>().InstancePerHttpRequest();
             builder.RegisterModule(new QueryHandlersModule());
+            builder.RegisterModule(new CommandHandlersModule());
 
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
