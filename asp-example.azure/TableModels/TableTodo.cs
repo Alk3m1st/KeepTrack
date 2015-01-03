@@ -28,9 +28,10 @@ namespace asp_example.models.TableModels
             DateTime created,
             string description,
             int displayOrder,
-            string userId)
+            string userId,
+            Guid Id)
         {
-            Id = Guid.NewGuid();
+            this.Id = Id;
             this.RowKey = this.Id.ToString();
 
             Archived = archived;
@@ -42,9 +43,9 @@ namespace asp_example.models.TableModels
             this.PartitionKey = this.UserId.ToString();
         }
 
-        public TableTodo(string userId, string description) : this()
+        public TableTodo(string userId, string description, Guid Id) : this()
         {
-            this.Id = Guid.NewGuid();
+            this.Id = Id;
             this.RowKey = this.Id.ToString();
 
             this.UserId = userId;

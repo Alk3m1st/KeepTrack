@@ -26,7 +26,7 @@ namespace asp_example.tests.Handlers.Queries
             // TODO: Move some of this to a base class or extension possibly...
             StorageAccount = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["StorageConnectionString"].ConnectionString);
 
-            var entity = new TableTodo(UserName, "Description");
+            var entity = new TableTodo(UserName, "Description", Guid.NewGuid());
             var tableClient = StorageAccount.GetTable<TableTodo>();
 
             var insertOperation = TableOperation.Insert(entity);

@@ -63,7 +63,8 @@ namespace asp_example.Controllers
                     t.Created,
                     t.Description,
                     t.DisplayOrder,
-                    getUserName()))
+                    getUserName(),
+                    Guid.NewGuid()))
                 .ToList();
 
             foreach (var todo in todosForMigration)
